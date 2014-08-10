@@ -16,7 +16,7 @@ class GpmSearchesController < ApplicationController
 
     api_key = "F826AD3A1A40C01E5BB4E8496830CD1A"
     player_steam_id = @gpm_search.player_id
-    requested_number_of_matches = 100
+    requested_number_of_matches = 50
 
     all_matches = JSON.load(open("https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?key=#{api_key}&account_id=#{player_steam_id}&matches_requested=#{requested_number_of_matches}"))
     match_ids = []
