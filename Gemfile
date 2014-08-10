@@ -9,6 +9,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
+gem 'rails_12factor'
 
 group :doc do
   gem 'sdoc', require: false
@@ -22,5 +23,3 @@ end
 group :test, :development do
   gem 'pry-rails'
 end
-
-gem 'rails_12factor', group: :production
