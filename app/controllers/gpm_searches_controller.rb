@@ -29,7 +29,9 @@ class GpmSearchesController < ApplicationController
     my_stats = []
 
     match_ids.each do |id|
+      puts "match id: #{id}"
       dota_match = JSON.load(open("https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=#{id}&key=#{api_key}"))
+      puts "player id: #{player_steam_id}"
       my_games[id] = dota_match["result"]["players"].select {|player| player["account_id"] == player_steam_id }
       my_stats << { match_id: id, hero: get_hero_name(my_games[id].first["hero_id"]), gold_per_minute: my_games[id].first["gold_per_min"], days_ago: get_days_ago(dota_match["result"]["start_time"]), duration_in_minutes: get_duration_in_minutes(dota_match["result"]["duration"])}
     end
