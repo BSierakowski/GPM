@@ -15,13 +15,19 @@
   </thead>
 
   <% @stats.each do |game| %>
-    <tr>
-      <td><a href="http://www.dotabuff.com/matches/<%= game[:match_id] %>"><%= game[:match_id] %></a></td>
-      <td><%= game[:hero] %></td>
-      <td><%= game[:gold_per_minute] %></td>
-      <td><%= game[:days_ago] %></td>
-      <td><%= game[:duration_in_minutes] %></td>
-    </tr>
+    <% if @stats.present? %>
+      <tr>
+        <td><a href="http://www.dotabuff.com/matches/<%= game[:match_id] %>"><%= game[:match_id] %></a></td>
+        <td><%= game[:hero] %></td>
+        <td><%= game[:gold_per_minute] %></td>
+        <td><%= game[:days_ago] %></td>
+        <td><%= game[:duration_in_minutes] %></td>
+      </tr>
+    <% else %>
+      <tr>
+        <td>Something goofed loading match <%= game[:match_id] %></td>
+      <tr>
+    <% end %> 
   <% end %>
 
 </table>
