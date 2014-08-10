@@ -39,6 +39,9 @@ class GpmSearchesController < ApplicationController
     my_stats.sort_by! { |game| game[:gold_per_minute] }.reverse!
 
     @stats = my_stats
+
+    rescue => e
+      puts "there was an error #{e}"
   end
 
   # GET /gpm_searches/new
