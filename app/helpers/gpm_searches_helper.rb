@@ -1,0 +1,2 @@
+module GpmSearchesHelper
+end

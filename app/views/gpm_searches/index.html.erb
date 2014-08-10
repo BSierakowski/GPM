@@ -1,0 +1,25 @@
+<h1>Listing gpm_searches</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @gpm_searches.each do |gpm_search| %>
+      <tr>
+        <td><%= link_to 'Show', gpm_search %></td>
+        <td><%= link_to 'Edit', edit_gpm_search_path(gpm_search) %></td>
+        <td><%= link_to 'Destroy', gpm_search, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Gpm search', new_gpm_search_path %>
