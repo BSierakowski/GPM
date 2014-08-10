@@ -1,20 +1,16 @@
 class GpmSearchesController < ApplicationController
   before_action :set_gpm_search, only: [:show, :edit, :update, :destroy]
 
-  # GET /gpm_searches
-  # GET /gpm_searches.json
   def index
     @gpm_searches = GpmSearch.all
   end
 
-  # GET /gpm_searches/1
-  # GET /gpm_searches/1.json
   def show
     require 'open-uri'
 
     @gpm_search = GpmSearch.find(params[:id])
 
-    api_key = "F826AD3A1A40C01E5BB4E8496830CD1A"
+    api_key = ENV["STEAM_API_KEY"]
     player_steam_id = @gpm_search.player_id
     requested_number_of_matches = 50
 
@@ -45,17 +41,13 @@ class GpmSearchesController < ApplicationController
     @stats = my_stats
   end
 
-  # GET /gpm_searches/new
   def new
     @gpm_search = GpmSearch.new
   end
 
-  # GET /gpm_searches/1/edit
   def edit
   end
 
-  # POST /gpm_searches
-  # POST /gpm_searches.json
   def create
     @gpm_search = GpmSearch.new(gpm_search_params)
 
@@ -70,8 +62,6 @@ class GpmSearchesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /gpm_searches/1
-  # PATCH/PUT /gpm_searches/1.json
   def update
     respond_to do |format|
       if @gpm_search.update(gpm_search_params)
@@ -84,8 +74,6 @@ class GpmSearchesController < ApplicationController
     end
   end
 
-  # DELETE /gpm_searches/1
-  # DELETE /gpm_searches/1.json
   def destroy
     @gpm_search.destroy
     respond_to do |format|
@@ -220,14 +208,14 @@ class GpmSearchesController < ApplicationController
       return heros[id]
     end
 
-def get_days_ago(seconds_since_epoch)
-  difference_in_seconds = Time.now - Time.at(seconds_since_epoch)
-  time_in_days = difference_in_seconds/60/60/24
+    def get_days_ago(seconds_since_epoch)
+      difference_in_seconds = Time.now - Time.at(seconds_since_epoch)
+      time_in_days = difference_in_seconds/60/60/24
 
-  return time_in_days.round(1)
-end
+      return time_in_days.round(1)
+    end
 
-def get_duration_in_minutes(seconds)
-  return seconds/60
-end
+    def get_duration_in_minutes(seconds)
+      return seconds/60
+    end
 end
