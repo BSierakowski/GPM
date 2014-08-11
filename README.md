@@ -1,5 +1,12 @@
 Todo:
 
+- When processing player matches in the player_match_worker, create a row for each player vs just the player that made the request.
+- Do a better job of checking for new records by creating a job that looks for missing matches
+- Create a record for the Match with the match data from GetMatchHistory
+- Deploy and so-forth
+
+
+
 The storage of ability_upgrades in the PlayerMatch table leaves a lot to be desired. The Dota API returns a nice array of hashes:
 
 ability_upgrades: [
@@ -49,3 +56,5 @@ We store it as a flat array:
  "ability=>5249",
  " time=>506",
  " level=>5",
+
+
