@@ -11,6 +11,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'rails_12factor'
 gem 'jquery-datatables-rails'
+gem 'sidekiq'
+gem 'unicorn'
+gem 'sinatra', '>= 1.3.0', :require => nil
 
 group :doc do
   gem 'sdoc', require: false
@@ -19,6 +22,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'foreman'
 end
 
 group :test, :development do

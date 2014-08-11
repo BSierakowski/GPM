@@ -11,10 +11,10 @@ class GpmSearchesController < ApplicationController
     @gpm_search = GpmSearch.find(params[:id])
 
     api_key = ENV["STEAM_API_KEY"]
-    player_steam_id = @gpm_search.player_id
+    player_id = @gpm_search.player_id
     requested_number_of_matches = 50
 
-    all_matches = JSON.load(open("https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?key=#{api_key}&account_id=#{player_steam_id}&matches_requested=#{requested_number_of_matches}"))
+    all_matches = JSON.load(open("https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?key=#{api_key}&account_id=#{player_id}&matches_requested=#{requested_number_of_matches}"))
     match_ids = []
 
     all_matches["result"]["matches"].each do |match|
@@ -28,8 +28,8 @@ class GpmSearchesController < ApplicationController
       begin 
         puts "match id: #{id}"
         dota_match = JSON.load(open("https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=#{id}&key=#{api_key}"))
-        puts "player id: #{player_steam_id}"
-        my_games[id] = dota_match["result"]["players"].select {|player| player["account_id"] == player_steam_id }
+        puts "player id: #{player_id}"
+        my_games[id] = dota_match["result"]["players"].select {|player| player["account_id"] == player_id }
         my_stats << { match_id: id, hero: get_hero_name(my_games[id].first["hero_id"]), gold_per_minute: my_games[id].first["gold_per_min"], days_ago: get_days_ago(dota_match["result"]["start_time"]), duration_in_minutes: get_duration_in_minutes(dota_match["result"]["duration"])}
       rescue => e
         puts "there was an error #{e}"

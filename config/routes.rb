@@ -2,7 +2,12 @@ Gpm::Application.routes.draw do
   resources :gpm_searches
   resources :match_stats
 
+  get 'player/:id' => 'player#show'
+
   root 'gpm_searches#new'
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
