@@ -1,0 +1,39 @@
+<h1>hello</h1>
+<table class="table">
+  <thead>
+    <th>Hero</th>
+    <th>Player</th>
+    <th>Level</th>
+    <th>K</th>
+    <th>D</th>
+    <th>LH</th>
+    <th>XPM</th>
+    <th>GPM</th>
+    <th>Item 1</th>
+    <th>Item 2</th>
+    <th>Item 3</th>
+    <th>Item 4</th>
+    <th>Item 5</th>
+    <th>Item 6</th>
+  </thead>
+  <tbody>
+    <% @players.each do |player| %>
+      <tr> 
+        <td><%= player["hero_id"] %></td>
+        <td><%= player["account_id"] %></td>
+        <td><%= player["level"] %></td>
+        <td><%= player["kills"] %></td>
+        <td><%= player["deaths"] %></td>
+        <td><%= player["last_hits"] %></td>
+        <td><%= player["xp_per_min"] %></td>
+        <td><%= player["gold_per_min"] %></td>
+        <td><%= get_item_name(player["item_0"]) %></td>
+        <td><%= get_item_name(player["item_1"]) %></td>
+        <td><%= get_item_name(player["item_2"]) %></td>
+        <td><%= get_item_name(player["item_3"]) %></td>
+        <td><%= get_item_name(player["item_4"]) %></td>
+        <td><%= get_item_name(player["item_5"]) %></td>
+      </tr>
+    <% end %>    
+  </tbody>
+</table>

@@ -1,5 +1,6 @@
 Gpm::Application.routes.draw do
   resources :gpm_searches
+  resources :match_stats
 
   root 'gpm_searches#new'
 
