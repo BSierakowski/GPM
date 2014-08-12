@@ -1,4 +1,11 @@
 class PlayerController < ApplicationController
+  def new
+  end
+
+  def search
+    redirect_to action: 'show', id: params[:query]
+  end
+
   def show
     my_stats = []
     player_id = params[:id].to_i

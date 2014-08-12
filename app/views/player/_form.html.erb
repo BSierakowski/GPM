@@ -1,0 +1,5 @@
+<%= form_tag("/player/search", method: "post") do %>
+  <%= label_tag(:query, "Search for:") %>
+  <%= text_field_tag(:query) %>
+  <%= submit_tag("Search") %>
+<% end %>
