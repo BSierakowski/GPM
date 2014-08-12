@@ -1,8 +1,8 @@
 class CreatePlayerMatch < ActiveRecord::Migration
   def change
     create_table :player_matches do |t|
-      t.integer :match_id, null: false
-      t.integer :player_id, null: false
+      t.integer :match_id, null: false, :limit => 8
+      t.integer :player_id, null: false, :limit => 8
       t.integer :player_slot, null: false
       t.integer :hero_id, null: false
       t.integer :item_0, null: false
