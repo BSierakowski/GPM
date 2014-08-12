@@ -2,16 +2,21 @@ class PlayerMatchWorker
   include Sidekiq::Worker
   require 'open-uri'
 
-  def perform(id, player_id)
-    dota_match = JSON.load(open("https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=#{id}&key=#{ENV["STEAM_API_KEY"]}"))
+  def perform(match_id)
+    dota_match = JSON.load(open("https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=#{match_id}&key=#{ENV["STEAM_API_KEY"]}"))
     dota_match = dota_match["result"]
-    player_stats = dota_match["players"].select {|player| player["account_id"] == player_id }
-    player_stats = player_stats.first
+    player_stats = dota_match["players"].each do |player|
+      make_player_row(player, match_id, dota_match)
+    end
+  end
+
+  def make_player_row(player, match_id, dota_match)
+    player_stats = player
 
     # a part of me feels like I should just iterate the hash and create the row based off of key value pairs
     match = PlayerMatch.new(
-      match_id: id.to_i,
-      player_id: player_id.to_i,
+      match_id: match_id.to_i,
+      player_id: player_stats["account_id"].to_i,
       player_slot: player_stats["player_slot"].to_i,
       hero_id: player_stats["hero_id"].to_i,
       item_0: player_stats["item_0"].to_i,
