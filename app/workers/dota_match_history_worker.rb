@@ -7,8 +7,10 @@ class DotaMatchHistoryWorker
     dota_match_ids = get_matches_from_api(player_id)
     nonpersisted_matches = dota_match_ids - stored_match_ids
 
-    nonpersisted_matches.each do |match_id|
-      PlayerMatchWorker.perform_async(match_id)
+    unless nonpersisted_matches.nil? 
+      nonpersisted_matches.each do |match_id|
+        PlayerMatchWorker.perform_async(match_id)
+      end
     end
   end
 

@@ -24,3 +24,7 @@ default: &default
 development:
   <<: *default
   database: gpm_development
+
+production:
+  <<: *default
+  database: gpm_development
